@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'jpizzletech/docker-agent:v1'
+      image 'delfidocker/maven-docker-agent:v1'
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
     }
   }
@@ -9,7 +9,7 @@ pipeline {
     stage('Checkout') {
       steps {
         sh 'echo passed'
-        //git branch: 'master', url: 'https://github.com/ejohnpaul/advanced-spring-app.git'
+        git branch: 'master', url: 'https://github.com/DPaquissi/advanced-springboot.git'
       }
     }
     stage('Build and Test') {
@@ -31,7 +31,7 @@ pipeline {
     }*/	
     stage('Build and Push Docker Image') {
       environment {
-        DOCKER_IMAGE = "jpizzletech/advanced-spring-app:${BUILD_NUMBER}"
+        DOCKER_IMAGE = "delfidocker/advanced-springboot:${BUILD_NUMBER}"
         // DOCKERFILE_LOCATION = "advanced-spring-app/spring-boot-app/Dockerfile"
         REGISTRY_CREDENTIALS = credentials('docker-cred')
       }
@@ -47,14 +47,14 @@ pipeline {
     }
     stage('Update Deployment File') {
         environment {
-            GIT_REPO_NAME = "advanced-spring-app"
-            GIT_USER_NAME = "ejohnpaul"
+            GIT_REPO_NAME = "advanced-springboot"
+            GIT_USER_NAME = "DPaquissi"
         }
         steps {
             withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                 sh '''
-                    git config user.email "johnpaule691@gmail.com"
-                    git config user.name "ejohnpaul"
+                    git config user.email "delfinapaquissi@gmail.com"
+                    git config user.name "DPaquissi"
                     BUILD_NUMBER=${BUILD_NUMBER}
                     sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" app-manifests/deployment.yml
                     git add app-manifests/deployment.yml
