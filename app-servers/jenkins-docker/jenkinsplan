@@ -1,10 +1,30 @@
 [0m[1mdata.aws_ami.amzlinux2: Reading...[0m[0m
 [0m[1maws_security_group.ec2: Refreshing state... [id=sg-0ab0c48b5e0e1c48a][0m
-[0m[1mdata.aws_ami.amzlinux2: Read complete after 0s [id=ami-0d887a308369b6881][0m
+[0m[1mdata.aws_ami.amzlinux2: Read complete after 1s [id=ami-0d887a308369b6881][0m
 [0m[1maws_instance.ec2_instance: Refreshing state... [id=i-088d99774dc8db32d][0m
 [0m[1mnull_resource.name: Refreshing state... [id=616515706][0m
 
-[0m[1m[32mNo changes.[0m[1m Your infrastructure matches the configuration.[0m
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  [33m~[0m update in-place[0m
 
-[0mTerraform has compared your real infrastructure against your configuration
-and found no differences, so no changes are needed.
+Terraform will perform the following actions:
+
+[1m  # aws_instance.ec2_instance[0m will be updated in-place
+[0m  [33m~[0m[0m resource "aws_instance" "ec2_instance" {
+        id                                   = "i-088d99774dc8db32d"
+      [33m~[0m[0m instance_type                        = "t2.medium" [33m->[0m[0m "t2.large"
+        tags                                 = {
+            "Name" = "jenkins_server"
+        }
+        [90m# (32 unchanged attributes hidden)[0m[0m
+
+        [90m# (8 unchanged blocks hidden)[0m[0m
+    }
+
+[1mPlan:[0m 0 to add, 1 to change, 0 to destroy.
+[0m[90m
+─────────────────────────────────────────────────────────────────────────────[0m
+
+Note: You didn't use the -out option to save this plan, so Terraform can't
+guarantee to take exactly these actions if you run "terraform apply" now.
