@@ -1,5 +1,5 @@
 resource "aws_security_group" "ec2" {
-  name        = "allow_jenkins"
+  name        = "allow_jenkins_v"
   description = "Allow jenkins outbound traffic"
 
   ingress {

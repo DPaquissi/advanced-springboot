@@ -5,7 +5,7 @@ provider "aws" {
 
 resource "aws_instance" "ec2_instance" {
   ami           = data.aws_ami.amzlinux2.id
-  instance_type = "t2.large"
+  instance_type = "t2.medium"
   #subnet_id = ??
   vpc_security_group_ids = [aws_security_group.ec2.id]
   key_name               = "vprofile-key" # Existing ssh key
